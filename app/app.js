@@ -11,7 +11,7 @@ class App extends Component {
                         <IndexRoute component={TwitterFeed} />
                         <Route path='instagram' component={Instagram} />
                     </Route>
-                    <Route path='/about' component={About} />
+                    <Route path='/about(/:name)' component={About} />
                     <Route path='/namedComponent' component={NamedComponents}>
                       <IndexRoute components={{ title: Title, subTitle: SubTitle }} />
                     </Route>
@@ -26,8 +26,8 @@ const Home = () => <h1>Hello from Home!</h1>
 const Address = (props) => (
     <div>
         <br />
-        <IndexLink activeClassName='active' to='/address'>Twitter Feed</IndexLink>&nbsp;
-        <IndexLink activeClassName='active' to='address/instagram'>Instagram Feed</IndexLink>
+        <IndexLink className='nav' activeClassName='active' to='/address'>Twitter Feed</IndexLink>&nbsp;
+        <IndexLink className='nav' activeClassName='active' to='address/instagram'>Instagram Feed</IndexLink>
         <h1>We are in SF</h1>
         {props.children}
     </div>
@@ -37,10 +37,10 @@ const Instagram = () => <h3>Instagram Feed</h3>
 const TwitterFeed = () => <h3>Twitter Feed</h3>
 const Nav = () => (
     <div>
-        <IndexLink activeClassName='active' to='/'>Home</IndexLink>&nbsp;
-        <IndexLink activeClassName='active' to='/address'>Address</IndexLink>
-        <IndexLink activeClassName='active' to='/about'>About</IndexLink>
-        <IndexLink activeClassName='active' to='/namedComponent'>NamedComponents</IndexLink>
+        <IndexLink className='nav' activeClassName='active' to='/'>Home</IndexLink>&nbsp;
+        <IndexLink className='nav' activeClassName='active' to='/address'>Address</IndexLink>
+        <IndexLink className='nav' activeClassName='active' to='/about'>About</IndexLink>
+        <IndexLink className='nav' activeClassName='active' to='/namedComponent'>Named Components</IndexLink>
     </div>
 )
 const Container = (props) => (
@@ -49,7 +49,12 @@ const Container = (props) => (
         {props.children}
     </div>
 )
-const About = () => <h3>Welcome to the About Page</h3>
+const About = (props) => (
+    <div>
+        <h3>Welcome to the About Page</h3>
+        {props.params.name && <h2>Hello, {props.params.name}</h2>}
+    </div>
+)
 const NamedComponents = (props) => (
     <div>
         {props.title}<br />
